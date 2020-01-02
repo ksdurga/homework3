@@ -25,11 +25,11 @@ var charset = {
       charset: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
    },
    numbers: {
-      enabled: false,
+      enabled: true,
       charset: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
    },
    specialChar: {
-      enabled: false,
+      enabled: true,
       charset: ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\"", "]","^", "_", "`", "{", "|", "}", "~", "\\"]
    }
 }
@@ -66,4 +66,9 @@ function generatePassword() {
    return result
 }
 
-console.log(generatePassword())
+function charsetOption () {
+   document.createElement ()
+}
+
+
+alert(generatePassword())
