@@ -1,7 +1,14 @@
+var submit = document.querySelector("#submit");
+var numbers = document.getElementById("numbers");
+var lowerCase = document.getElementById("lowerCase");
+var upperCase = document.getElementById("upperCase");
+var specialChar = document.getElementById("specialChars");
+var passwordDisplay = document.getElementById("passwordDisplay");
+
+
 alert("You're here to create a new password!");
 
 var passLength=prompt("Please enter your desired password length (must be between 8 and 128 characters).");
-
 // password length set
 function lengthInput(num) {
    if (num >= 8 && num <= 128) {
@@ -12,38 +19,41 @@ function lengthInput(num) {
    alert("Please enter a number between 8 and 128")
    return null
    }
-}   
+}
+
 lengthInput(passLength);
 
 var charset = {
    lowerCase: {
-      enabled: false,
+      checked: true,
       charset: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
    },
    upperCase: {
-      enabled: false,
+      checked: false,
       charset: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
    },
    numbers: {
-      enabled: true,
+      checked: false,
       charset: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
    },
    specialChar: {
-      enabled: true,
+      checked: false,
       charset: ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\"", "]","^", "_", "`", "{", "|", "}", "~", "\\"]
    }
 }
 
+//create array of all enabled charsets
 function getChars () {
    var result = [];
    for (key in charset) {
-      if (charset[key].enabled) {
+      if (charset[key].checked) {
          result = result.concat(charset[key].charset)
       }
    }
    return result
 }
 
+//chooses random integer inside length of charset array
 function randomInt(charsetLength) {
 	var x = Math.floor(Math.random() * charsetLength);
 	if (x < 0 || x >= charsetLength) {
@@ -53,9 +63,11 @@ function randomInt(charsetLength) {
 	return x;
 }
 
+//chooses random char from chaset array for each spot in password
 function generatePassword() {
    var result = "";
    var charArray = getChars ();
+   //if user doesn't choose any charset options
    if (charArray.length == 0) {
       alert("Select a character set");
       return null;
@@ -66,9 +78,11 @@ function generatePassword() {
    return result
 }
 
-function charsetOption () {
-   document.createElement ()
-}
+function doCopy() {
+   navigator.clipboard.writeText(generatedPassword);
+ }
+ 
 
 
-alert(generatePassword())
+passwordFinal = generatePassword();
+passwordDisplay.placeholder = passwordFinal;
