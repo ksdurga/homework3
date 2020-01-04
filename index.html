@@ -16,30 +16,32 @@
          <!-- options for charset -->
          <h5>Select at least one option for characters in your password</h5>
          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="lowerCase">
+            <input class="form-check-input" type="checkbox" value="checked" id="lowerCase">
             <label class="form-check-label" for="defaultCheck1">
                Lowercase Letters
             </label>
          </div>
          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="upperCase">
+            <input class="form-check-input" type="checkbox" value="checked" id="upperCase">
             <label class="form-check-label" for="defaultCheck1">
                Uppercase 
             </label>
          </div>
          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="numbers">
+            <input class="form-check-input" type="checkbox" value="checked" id="numbers">
             <label class="form-check-label" for="defaultCheck1">
                Numbers
             </label>
          </div>
          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="specialChars">
+            <input class="form-check-input" type="checkbox" value="checked" id="specialChars">
             <label class="form-check-label" for="defaultCheck1">
                Special Characters
             </label>
          </div>
-         <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+         <!-- submit button -->
+         <button type="submit" class="btn btn-primary" id="generate">Generate</button>
+         <!-- displayed password -->
          <input class="form-control" type="text" id="passwordDisplay" placeholder="Password will display here." readonly>
       </form>
    </div>

@@ -1,4 +1,4 @@
-var submit = document.querySelector("#submit");
+var generateButton = document.querySelector("#generate");
 var numbers = document.getElementById("numbers");
 var lowerCase = document.getElementById("lowerCase");
 var upperCase = document.getElementById("upperCase");
@@ -78,11 +78,16 @@ function generatePassword() {
    return result
 }
 
-function doCopy() {
-   navigator.clipboard.writeText(generatedPassword);
- }
- 
-
-
+// generate password and display in box
 passwordFinal = generatePassword();
 passwordDisplay.placeholder = passwordFinal;
+
+function doCopy() {
+   navigator.clipboard.writeText(generatedPassword);
+}
+
+generateButton.addEventListener("click", generatePassword);
+
+var generatePassword = function(event){
+   event.preventDefault();
+}
