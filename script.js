@@ -4,11 +4,12 @@ var lowerCase = document.getElementById("lowerCase");
 var upperCase = document.getElementById("upperCase");
 var specialChar = document.getElementById("specialChars");
 var passwordDisplay = document.getElementById("passwordDisplay");
+var passLength = document.getElementById("length")
+
+var inputLength=0;
 
 
-alert("You're here to create a new password!");
 
-var passLength=prompt("Please enter your desired password length (must be between 8 and 128 characters).");
 // password length set
 function lengthInput(num) {
    if (num >= 8 && num <= 128) {
@@ -21,7 +22,7 @@ function lengthInput(num) {
    }
 }
 
-lengthInput(passLength);
+// lengthInput(passLength);
 
 var charset = {
    lowerCase: {
@@ -86,8 +87,9 @@ function doCopy() {
    navigator.clipboard.writeText(generatedPassword);
 }
 
-generateButton.addEventListener("click", generatePassword);
+generateButton.addEventListener("click", function(e){
+   e.preventDefault();
+   inputLength = passLength.value;
+   console.log(inputLength);
+});
 
-var generatePassword = function(event){
-   event.preventDefault();
-}
