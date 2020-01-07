@@ -24,7 +24,7 @@ var charset = {
    },
    specialChar: {
       checked: false,
-      charset: ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\"", "]","^", "_", "`", "{", "|", "}", "~", "\\"]
+      charset: ["!", "#", "$", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]","^", "_", "`", "{", "|", "}", "~"]
    }
 }
 
@@ -42,32 +42,31 @@ function lengthInput(num) {
 
 //create array of all enabled charset
 
+var result = [];
+
 var numEnabled = $("#numbers").on("click", function(){
-   var result = [];
+   // var result = [];
    result += result.concat(charset.numbers.charset);
-   console.log(result);
 });
 var upperEnabled = $("#upperCase").on("click", function(){
-   var result = [];
+   // var result = [];
    result += result.concat(charset.upperCase.charset);
-   console.log(result);
 });
 var lowerEnabled = $("#lowerCase").on("click", function(){
-   var result = [];
+   // var result = [];
    result += result.concat(charset.lowerCase.charset);
-   console.log(result);
 });
 var specCharEnabled = $("#specialChars").on("click", function(){
-   var result = [];
+   // var result = [];
    result += result.concat(charset.specialChar.charset);
-   console.log(result);
 });
 
 
 function getChars() {
-   var result = [];
+   // var result = [];
    result += result.concat(numEnabled+upperEnabled+lowerEnabled+specCharEnabled);
    console.log(result);
+   return result;
 };
 
 // function getChars () {
@@ -141,14 +140,16 @@ function randomInt(charsetLength) {
 
 //chooses random char from chaset array for each spot in password
 function generatePassword() {
-   var result = "";
+   var password = "";
    var charArray=getChars();
    //if user doesn't choose any charset options
    if (charArray.length) {
       for (var i = 0; i < passLength.value; i++){
-      result += charArray[randomInt(charArray.length)];
+      password += charArray[randomInt(charArray.length)];
       }
-      return result
+      console.log(password);
+      return password;
+      
    }
    else {
       alert("Select a character set");
@@ -168,6 +169,6 @@ generateButton.addEventListener("click", function(e){
    e.preventDefault();
    inputLength = passLength.value;
    console.log(inputLength);
-   generatePassword();
+   passwordDisplay.placeholder=generatePassword();
 });
 
