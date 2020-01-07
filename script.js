@@ -28,20 +28,6 @@ var charset = {
    }
 }
 
-// if (numbers.checked == true) {
-//    getChars();
-// }
-// if (upperCase.checked == true) {
-//    getChars();
-// }
-// if (lowerCase.checked == true) {
-//    getChars();
-// }
-// if (specialChars.checked == true) {
-//    getChars();
-// }
-
-
 // password length set
 function lengthInput(num) {
    if (num >= 8 && num <= 128) {
@@ -54,25 +40,93 @@ function lengthInput(num) {
    }
 }
 
-//create array of all enabled charsets
-function getChars () {
+//create array of all enabled charset
+
+var numEnabled = $("#numbers").on("click", function(){
    var result = [];
-   for (key in charset) {
-      if (numbers.checked == true) {
-         result = result.concat(charset[key].charset)
-      }
-      if (upperCase.checked == true) {
-         result = result.concat(charset[key].charset)
-      }
-      if (lowerCase.checked == true) {
-         result = result.concat(charset[key].charset)
-      }
-      if (specialChar.checked == true) {
-         result = result.concat(charset[key].charset)
-      }
-   }
-   return result
+   result += result.concat(charset.numbers.charset);
+   console.log(result);
+});
+var upperEnabled = $("#upperCase").on("click", function(){
+   var result = [];
+   result += result.concat(charset.upperCase.charset);
+   console.log(result);
+});
+var lowerEnabled = $("#lowerCase").on("click", function(){
+   var result = [];
+   result += result.concat(charset.lowerCase.charset);
+   console.log(result);
+});
+var specCharEnabled = $("#specialChars").on("click", function(){
+   var result = [];
+   result += result.concat(charset.specialChar.charset);
+   console.log(result);
+});
+
+
+function getChars() {
+   var result = [];
+   result += result.concat(numEnabled+upperEnabled+lowerEnabled+specCharEnabled);
+   console.log(result);
 };
+
+// function getChars () {
+//    var result = [];
+//    for (key in charset) {
+//       // if (numbers.checked == true) {
+//       //    result += result.concat(charset[key].charset);
+//       //    console.log(result);
+//       // }
+//       // if (upperCase.checked == true) {
+//       //    result += result.concat(charset[key].charset);
+//       //    console.log(result);
+//       // }
+//       // if (lowerCase.checked == true) {
+//       //    result += result.concat(charset[key].charset);
+//       //    console.log(result);
+//       // }
+//       // if (specialChar.checked == true) {
+//       //    result += result.concat(charset[key].charset);
+//       //    console.log(result);
+//       // }
+      
+//    }
+//    return result
+// };
+
+// function getChars () {
+//    var result = [];
+//    for (key in charset) {
+//       if (numbers.checked == true) {
+//          charset[key].checked == true;
+//       }
+//       if (lowerCase.checked == true) {
+//          charset[key].checked == true;
+//       }
+//       if (upperCase.checked == true) {
+//          charset[key].checked == true;
+//       }
+//       if (specialChar.checked == true) {
+//          charset[key].checked == true;
+//       }
+//       if (charset[key].checked == true) {
+//          result += result.concat(charset[key].charset);
+//          console.log(result);
+//       }
+//    }
+//    return result
+// };
+
+// function getChars () {
+//    var result = [];
+//    charset.key.charset.forEach(function(charsetType) {
+//      let charset = charset[charsetType];
+//      if(charset.checked) {
+//        result = result.concat(charset.charset);
+//      }
+//    });
+//    return result
+// };
 
 //chooses random integer inside length of charset array
 function randomInt(charsetLength) {
@@ -91,7 +145,7 @@ function generatePassword() {
    var charArray=getChars();
    //if user doesn't choose any charset options
    if (charArray.length) {
-       for (var i = 0; i < passLength; i++){
+      for (var i = 0; i < passLength.value; i++){
       result += charArray[randomInt(charArray.length)];
       }
       return result
@@ -113,9 +167,7 @@ function doCopy() {
 generateButton.addEventListener("click", function(e){
    e.preventDefault();
    inputLength = passLength.value;
-   lengthInput(inputLength);
    console.log(inputLength);
-
    generatePassword();
 });
 
