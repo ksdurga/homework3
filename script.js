@@ -28,6 +28,18 @@ var charset = {
    }
 };
 
+//grabs user input, verifies length requirement
+generateButton.addEventListener("click", function(e){
+   e.preventDefault();
+   //grabs form value for password length
+   inputLength = passLength.value;
+   //passes length through function to verify meeets requirements
+   lengthInput(inputLength);
+   console.log(inputLength);
+   passwordDisplay.placeholder=generatePassword();
+});
+
+
 // password length set
 function lengthInput(num) {
    if (num >= 8 && num <= 128) {
@@ -164,10 +176,5 @@ function doCopy() {
    navigator.clipboard.writeText(generatedPassword);
 }
 
-generateButton.addEventListener("click", function(e){
-   e.preventDefault();
-   inputLength = passLength.value;
-   console.log(inputLength);
-   passwordDisplay.placeholder=generatePassword();
-});
+
 
