@@ -7,6 +7,8 @@ var passwordDisplay = document.getElementById("passwordDisplay");
 var passLength = document.getElementById("length")
 var inputLength=0;
 
+var result = [];
+var result = "";
 // lengthInput(passLength);
 
 var charset = {
@@ -34,7 +36,7 @@ generateButton.addEventListener("click", function(e){
    //grabs form value for password length
    inputLength = passLength.value;
    //passes length through function to verify meeets requirements
-   lengthInput(inputLength);
+   
    console.log(inputLength);
    passwordDisplay.placeholder=generatePassword();
 });
@@ -44,6 +46,7 @@ generateButton.addEventListener("click", function(e){
 function lengthInput(num) {
    if (num >= 8 && num <= 128) {
       console.log(num)
+      getChars();
       return num
    }
    else {
@@ -52,80 +55,36 @@ function lengthInput(num) {
    }
 }
 
-//create array of all enabled charset
-
-var result = [];
-
-var numEnabled = $("#numbers").on("click", function(){
-   // var result = [];
-   result += result.concat(charset.numbers.charset);
-});
-var upperEnabled = $("#upperCase").on("click", function(){
-   // var result = [];
-   result += result.concat(charset.upperCase.charset);
-});
-var lowerEnabled = $("#lowerCase").on("click", function(){
-   // var result = [];
-   result += result.concat(charset.lowerCase.charset);
-});
-var specCharEnabled = $("#specialChars").on("click", function(){
-   // var result = [];
-   result += result.concat(charset.specialChar.charset);
-});
 
 
-function getChars() {
-   // var result = [];
-   result += result.concat(numEnabled, upperEnabled, lowerEnabled, specCharEnabled);
-   return result;
+
+
+function getChars () {
+   console.log(numbers.checked);
+   for (key in charset) {
+      if (numbers.checked == true) {
+         result += result.concat(charset.numbers.charset);
+         
+      }
+      if (upperCase.checked == true) {
+         result += result.concat(charset.upperCase.charset);
+         // console.log(result);
+      }
+      if (lowerCase.checked == true) {
+         result += result.concat(charset.lowerCase.charset);
+         // console.log(result);
+      }
+      if (specialChar.checked == true) {
+         result += result.concat(charset.specialChar.charset);
+         // console.log(result);
+      }
+      
+   }
+   console.log(result);
+   return result
 };
 
-// function getChars () {
-//    var result = [];
-//    for (key in charset) {
-//       // if (numbers.checked == true) {
-//       //    result += result.concat(charset[key].charset);
-//       //    console.log(result);
-//       // }
-//       // if (upperCase.checked == true) {
-//       //    result += result.concat(charset[key].charset);
-//       //    console.log(result);
-//       // }
-//       // if (lowerCase.checked == true) {
-//       //    result += result.concat(charset[key].charset);
-//       //    console.log(result);
-//       // }
-//       // if (specialChar.checked == true) {
-//       //    result += result.concat(charset[key].charset);
-//       //    console.log(result);
-//       // }
-      
-//    }
-//    return result
-// };
 
-// function getChars () {
-//    var result = [];
-//    for (key in charset) {
-//       if (numbers.checked == true) {
-//          charset[key].checked == true;
-//       }
-//       if (lowerCase.checked == true) {
-//          charset[key].checked == true;
-//       }
-//       if (upperCase.checked == true) {
-//          charset[key].checked == true;
-//       }
-//       if (specialChar.checked == true) {
-//          charset[key].checked == true;
-//       }
-//       if (charset[key].checked == true) {
-//          result += result.concat(charset[key].charset);
-//          console.log(result);
-//       }
-//    }
-//    return result
-// };
 
 // function getChars () {
 //    var result = [];
@@ -149,16 +108,16 @@ function randomInt(charsetLength) {
 };
 
 
-//chooses random char from chaset array for each spot in password
+// chooses random char from chaset array for each spot in password
 function generatePassword() {
    var password = "";
-   var charArray=getChars();
+   var charArray=lengthInput(inputLength);
    //if user doesn't choose any charset options
    if (charArray.length) {
-      for (var i = 0; i < passLength.value; i++){
+      for (var i = 0; i < passLength; i++){
       password += charArray[randomInt(charArray.length)];
       }
-      console.log(password);
+      // console.log(password);
       return password;
       
    }
