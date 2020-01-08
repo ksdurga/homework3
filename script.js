@@ -26,7 +26,7 @@ var charset = {
       checked: false,
       charset: ["!", "#", "$", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]","^", "_", "`", "{", "|", "}", "~"]
    }
-}
+};
 
 // password length set
 function lengthInput(num) {
@@ -64,8 +64,7 @@ var specCharEnabled = $("#specialChars").on("click", function(){
 
 function getChars() {
    // var result = [];
-   result += result.concat(numEnabled+upperEnabled+lowerEnabled+specCharEnabled);
-   console.log(result);
+   result += result.concat(numEnabled, upperEnabled, lowerEnabled, specCharEnabled);
    return result;
 };
 
