@@ -4,29 +4,28 @@ var lowerCase = document.getElementById("lowerCase");
 var upperCase = document.getElementById("upperCase");
 var specialChar = document.getElementById("specialChars");
 var passwordDisplay = document.getElementById("passwordDisplay");
-var passLength = document.getElementById("length")
 var inputLength=0;
 
 var result = [];
-var result = "";
+// var result = "";
 // lengthInput(passLength);
 
-var charset = {
+var charsets = {
    lowerCase: {
       checked: false,
-      charset: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+      charset: "abcdefghijklmnopqrstuvwxyz"
    },
    upperCase: {
       checked: false,
-      charset: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+      charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
    },
    numbers: {
       checked: false,
-      charset: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      charset: "0123456789"
    },
    specialChar: {
       checked: false,
-      charset: ["!", "#", "$", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]","^", "_", "`", "{", "|", "}", "~"]
+      charset: "!#$%&()*+-.;:<>=?[]^_{}|"
    }
 };
 
@@ -34,10 +33,6 @@ var charset = {
 generateButton.addEventListener("click", function(e){
    e.preventDefault();
    //grabs form value for password length
-   inputLength = passLength.value;
-   //passes length through function to verify meeets requirements
-   
-   console.log(inputLength);
    passwordDisplay.placeholder=generatePassword();
 });
 
@@ -45,8 +40,7 @@ generateButton.addEventListener("click", function(e){
 // password length set
 function lengthInput(num) {
    if (num >= 8 && num <= 128) {
-      console.log(num)
-      getChars();
+      // getChars();
       return num
    }
    else {
@@ -57,49 +51,29 @@ function lengthInput(num) {
 
 
 
-
-
-function getChars () {
-   console.log(numbers.checked);
-   for (key in charset) {
-      if (numbers.checked == true) {
-         result += result.concat(charset.numbers.charset);
-         
-      }
-      if (upperCase.checked == true) {
-         result += result.concat(charset.upperCase.charset);
-         // console.log(result);
-      }
-      if (lowerCase.checked == true) {
-         result += result.concat(charset.lowerCase.charset);
-         // console.log(result);
-      }
-      if (specialChar.checked == true) {
-         result += result.concat(charset.specialChar.charset);
-         // console.log(result);
-      }
-      
+function getChars() {
+   if (numbers.checked == true) {
+      result = result += charsets.numbers.charset;
+   }
+   if (upperCase.checked == true) {
+      result = result += charsets.upperCase.charset;
+      // console.log(result);
+   }
+   if (lowerCase.checked == true) {
+      result = result += charsets.lowerCase.charset;
+      // console.log(result);
+   }
+   if (specialChar.checked == true) {
+      result = result += charsets.specialChar.charset;
+      // console.log(result);
    }
    console.log(result);
-   return result
+   return result;
 };
-
-
-
-// function getChars () {
-//    var result = [];
-//    charset.key.charset.forEach(function(charsetType) {
-//      let charset = charset[charsetType];
-//      if(charset.checked) {
-//        result = result.concat(charset.charset);
-//      }
-//    });
-//    return result
-// };
 
 //chooses random integer inside length of charset array
 function randomInt(charsetLength) {
-	var x = Math.floor(Math.random() * charsetLength);
+	var x = Math.floor(Math.random() * charsetLength) + 1;
 	if (x < 0 || x >= charsetLength) {
       alert ("Random integer not in index");
       return null;
@@ -111,15 +85,16 @@ function randomInt(charsetLength) {
 // chooses random char from chaset array for each spot in password
 function generatePassword() {
    var password = "";
-   var charArray=lengthInput(inputLength);
+   var passLength = document.getElementById("length").value;
+   var charArray = getChars();
+
    //if user doesn't choose any charset options
    if (charArray.length) {
-      for (var i = 0; i < passLength; i++){
-      password += charArray[randomInt(charArray.length)];
+      for (var i = 0; i < parseInt(passLength); i++){
+         password += charArray[randomInt(charArray.length)];
       }
-      // console.log(password);
+      console.log(password);
       return password;
-      
    }
    else {
       alert("Select a character set");
@@ -127,9 +102,6 @@ function generatePassword() {
    }
 }
 
-// generate password and display in box
-// passwordFinal = generatePassword();
-// passwordDisplay.placeholder = passwordFinal;
 
 function doCopy() {
    navigator.clipboard.writeText(generatedPassword);
