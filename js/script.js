@@ -4,7 +4,7 @@ var lowerCase = document.getElementById("lowerCase");
 var upperCase = document.getElementById("upperCase");
 var specialChar = document.getElementById("specialChars");
 var passwordDisplay = document.getElementById("passwordDisplay");
-// var inputLength=0;
+var start = document.getElementById("start");
 
 // var result = "";
 // lengthInput(passLength);
